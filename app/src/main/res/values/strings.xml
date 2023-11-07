@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HeroHabit</string>
+    <string name="title_activity_task_creator">TaskCreator</string>
+    <string name="cancel_task_button">Cancel Task</string>
+    <string name="create_task_button">Create Task</string>
+    <string name="calendar_content_description">Calendar Icon that launches the Calendar app</string>
 </resources>
