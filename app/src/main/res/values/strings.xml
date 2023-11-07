@@ -4,4 +4,5 @@
     <string name="cancel_task_button">Cancel Task</string>
     <string name="create_task_button">Create Task</string>
     <string name="calendar_content_description">Calendar Icon that launches the Calendar app</string>
+    <string name="task_creator_hint">Insert Task Name Here</string>
 </resources>
