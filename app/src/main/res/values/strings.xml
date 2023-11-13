@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HeroHabit</string>
+    <string name="Nombre">Nombre: </string>
+    <string name="Nivel">Nivel: </string>ç
+    <string name="SiguienteNivel">Siguiente nivel: </string>
 </resources>
