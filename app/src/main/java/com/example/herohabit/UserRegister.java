@@ -20,11 +20,11 @@ public class UserRegister {
         values.put(DBManager.getID(), username);
         values.put(DBManager.getPASSWORD(), password);
 
-        long newRowId = db.insert(DBManager.getUSERS(), null, values);
-        //db.execSQL("INSERT INTO "+DBManager.getUSERS()+" VALUES (username, password)");
+        //long newRowId = db.insert(DBManager.getUSERS(), null, values);
+        db.execSQL("INSERT INTO "+DBManager.getUSERS()+" VALUES (username, password)");
         db.close();
 
-        return newRowId;
+        return 0;
     }
 }
 

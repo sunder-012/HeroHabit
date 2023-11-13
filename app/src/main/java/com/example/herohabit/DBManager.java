@@ -12,11 +12,13 @@ public class DBManager extends SQLiteOpenHelper {
     private static final String ID = "id";
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
+    private static final String EXPERIENCE = "xp";
 
     private static final String CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS " + USERS + " ("
             + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + USERNAME + " TEXT, "
-            + PASSWORD + " TEXT);";
+            + PASSWORD + " TEXT, "
+            + EXPERIENCE + "INTEGER);";
 
     public DBManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
