@@ -5,7 +5,6 @@ public class Mission {
     private int missionID;
     private int userID;
     private String title;
-    private int xpAmount;
 
     public int getMissionID() {
         return missionID;
@@ -29,13 +28,5 @@ public class Mission {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getXpAmount() {
-        return xpAmount;
-    }
-
-    public void setXpAmount(int xpAmount) {
-        this.xpAmount = xpAmount;
     }
 }

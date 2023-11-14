@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase db;
+    SQLiteDatabase dbTasks;
     private static final int SIGNIN_REQUEST_CODE = 1;
     private static final int TASKLIST_REQUEST_CODE = 2;
     private Button signIn;
@@ -40,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
             + PASSWORD + " TEXT, "
             + EXPERIENCE + " INTEGER);";
 
+    private static final String TASKS = "tasks";
+    private static final String TASK_ID = "id";
+    private static final String USER_ID = "user_id";
+    private static final String TTTLE = "title";
+    private static final String CREATE_TABLE_TASKS = "CREATE TABLE IF NOT EXISTS " + TASKS + " ("
+            + TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + USER_ID + " INTEGER, "
+            + TTTLE + " TEXT);";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.editTextTextPassword);
         db=openOrCreateDatabase("UserDatabase.db", Context.MODE_PRIVATE,null);
         db.execSQL(CREATE_TABLE_USERS);
+
+        dbTasks=openOrCreateDatabase("TaskDatabase.db", Context.MODE_PRIVATE,null);
+        dbTasks.execSQL(CREATE_TABLE_TASKS);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
                 Cursor cursor = db.rawQuery(selectQuery, null);
 
                 if (cursor != null && cursor.moveToFirst()) {
+                    int id = cursor.getInt(0);
+
                     cursor.close();
                     Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
+                    intent.putExtra("user_id", id);
+                    setResult(RESULT_OK, intent);
                     startActivityForResult(intent, TASKLIST_REQUEST_CODE);
                     // El usuario y la contraseña son correctos, puedes acceder a los datos de la fila
                     /*int id = cursor.getInt(0);
@@ -93,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -106,5 +123,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error en sign in", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 }
