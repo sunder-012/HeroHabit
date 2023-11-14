@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.herohabit.NewTaskActivity.NEW_TASK;
@@ -17,24 +19,49 @@ public class TaskListActivity extends AppCompatActivity {
     private static final int MAX_RADIOBUTTONS = 7;
     public static final int TASK_LIST = 1;
     private RadioGroup radioGroup = null;
-    private RadioButton radioButton1 = null;
-    private RadioButton radioButton2 = null;
-    private RadioButton radioButton3 = null;
-    private RadioButton radioButton4 = null;
-    private RadioButton radioButton5 = null;
-    private RadioButton radioButton6 = null;
-    private RadioButton radioButton7 = null;
+    private ProgressBar progressBar = null;
+    private RadioButton radioButton = null;
+    private int progress = 0;
+    private int level = 1;
+    private TextView lvl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasklist);
+
+        radioGroup = findViewById(R.id.radioGroup);
+        progressBar = findViewById(R.id.progressBar);
+
         findViewById(R.id.addTask).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newTaskActivity(v);
             }
         });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioGroup.removeView(findViewById(checkedId));
+                updateProgress();
+            }
+        });
+    }
+    private void updateProgress(){
+        progress++;
+        progressBar.setProgress(progress);
+
+        if (progress >= progressBar.getMax()){
+            increaseLevel();
+        }
+
+    }
+
+    private void increaseLevel(){
+        Toast.makeText(getBaseContext(), "You reached a new level!", Toast.LENGTH_SHORT).show();
+        lvl = findViewById(R.id.lvl);
+        level++;
+        lvl.setText(level);
     }
 
     private void newTaskActivity(View view) {
@@ -52,7 +79,7 @@ public class TaskListActivity extends AppCompatActivity {
 
             // Create a new RadioButton with the returned data within the RadioGroup
             if (param1 != null && !param1.isEmpty()) {
-                if (radioGroup.getChildCount() > MAX_RADIOBUTTONS) {
+                if (radioGroup.getChildCount() < MAX_RADIOBUTTONS) {
                     RadioButton radioButton = new RadioButton(this);
                     radioButton.setText(param1);
                     RadioGroup radioGroup = findViewById(R.id.radioGroup);
@@ -63,6 +90,8 @@ public class TaskListActivity extends AppCompatActivity {
                     params.weight = 1;
                     radioButton.setLayoutParams(params);
                     radioGroup.addView(radioButton);
+                } else {
+                    Toast.makeText(getBaseContext(), "Max task reached.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
