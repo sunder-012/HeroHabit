@@ -2,7 +2,9 @@ package com.example.herohabit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,7 +18,9 @@ public class TaskCreator extends AppCompatActivity {
     private TextInputEditText inputTaskName;
     private Button buttonCreateTask;
     private ImageButton imageButtonCalendar;
-
+    private SQLiteDatabase db;
+    private int userId;
+    private String taskName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +33,20 @@ public class TaskCreator extends AppCompatActivity {
         // Initially, disable the button
         buttonCreateTask.setEnabled(false);
 
+        // Retrieve the user ID from the intent
+        /*
+        Intent intent = getIntent();
+        if (intent.hasExtra("user_id")) {
+            userId = intent.getIntExtra("user_id", -1); // -1 is the default value if the key is not found
+        } else {
+            Toast.makeText(v.getContext(), "User ID not provided", Toast.LENGTH_SHORT).show();
+        }
+         */
+
         // Add a TextWatcher to the input field
         inputTaskName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not needed for this example
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -44,27 +57,40 @@ public class TaskCreator extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                // Not needed for this example
             }
         });
-
 
         // Set an OnClickListener for the ImageButton to open the calendar with a chooser
         imageButtonCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an implicit intent to open the calendar app
-                //v.getContext(),TaskCreator.class
-                Intent calendarIntent = new Intent();
-                calendarIntent.setAction(Intent.ACTION_VIEW);
-                calendarIntent.setType("vnd.android.cursor.item/event");
+                // Get the task name
+                taskName = inputTaskName.getText().toString();
+                // Create an implicit intent to open the calendar app with an event with the tas name as title
+                Intent calendarIntent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.Events.TITLE, taskName);
                 // Create a chooser dialog
                 Intent chooser = Intent.createChooser(calendarIntent, "Choose Calendar App");
-
+                // Start the Activity
                 if(chooser.resolveActivity( v.getContext().getPackageManager())!=null){
                     v.getContext().startActivity(chooser);
-                } else
+                } else{
                     Toast.makeText( v.getContext(), "No calendar apps found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        buttonCreateTask.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // Get the task name
+                taskName = inputTaskName.getText().toString();
+                // Create the insert String
+                String insertQuery = "";
+                //String insertQuery = "INSERT INTO " + MISSION + " (" + userId+ ", " + taskname + ") VALUES ('" + username + "', '" + password + "', " + experience + ");";;
+                // Execute the query
+                db.execSQL(insertQuery);
             }
         });
     }

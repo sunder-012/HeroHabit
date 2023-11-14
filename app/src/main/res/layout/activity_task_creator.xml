@@ -57,4 +57,15 @@
             android:hint="@string/task_creator_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/lblInfoCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCalendar"
+        app:layout_constraintVertical_bias="0.168" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
