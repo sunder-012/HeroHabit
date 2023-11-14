@@ -3,4 +3,8 @@
     <string name="Nombre">Nombre: </string>
     <string name="Nivel">Nivel: </string>ç
     <string name="SiguienteNivel">Siguiente nivel: </string>
+    <string name="login">Log In</string>
+    <string name="signin">Sign In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
