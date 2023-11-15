@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     SQLiteDatabase dbTasks;
     private static final int SIGNIN_REQUEST_CODE = 1;
-    private static final int TASKLIST_REQUEST_CODE = 2;
+    public static final int TASKLIST_REQUEST_CODE = 2;
     private Button signIn;
     private Button logIn;
     private EditText usernameText;

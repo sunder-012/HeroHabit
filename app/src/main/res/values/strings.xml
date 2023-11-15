@@ -4,4 +4,11 @@
     <string name="signin">Sign In</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="title_activity_task_creator">TaskCreator</string>
+    <string name="cancel_task_button">Cancel Task</string>
+    <string name="create_task_button">Create Task</string>
+    <string name="calendar_content_description">Calendar Icon that launches the Calendar app</string>
+    <string name="task_creator_hint">Insert Task Name Here</string>
+    <string name="no_calendar">There are not Calendar App</string>
+    <string name="info_calendar">Click on the image to add the Mission to your Calendar</string>
 </resources>

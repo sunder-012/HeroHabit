@@ -17,7 +17,7 @@ public class SignInActivity extends AppCompatActivity {
     private Button signIn;
     private EditText usernameText;
     private EditText passwordText;
-    final UserRegister userRegistration = new UserRegister(this);
+    //final UserRegister userRegistration = new UserRegister(this);
 
     //DATABASE ATTRIBUTES
     private static final String USERS = "users";
