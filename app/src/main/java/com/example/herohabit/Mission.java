@@ -39,3 +39,4 @@ public class Mission {
         this.xpAmount = xpAmount;
     }
 }
+

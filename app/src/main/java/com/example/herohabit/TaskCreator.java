@@ -9,46 +9,37 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.UUID;
+//import com.google.android.material.textfield.TextInputEditText;
 
 public class TaskCreator extends AppCompatActivity {
-    private TextInputEditText inputTaskName;
+    private EditText taskDescription;
     private Button buttonCreateTask;
+    private Button buttonCancelTask;
     private ImageButton imageButtonCalendar;
-    private SQLiteDatabase db;
-    private int userId;
-    private String taskName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_creator);
+        setContentView(R.layout.activity_taskcreator);
 
-        inputTaskName = findViewById(R.id.inputTaskName);
+        taskDescription = findViewById(R.id.textTaskTitle);
         buttonCreateTask = findViewById(R.id.buttonCreateTask);
+        buttonCancelTask = findViewById(R.id.buttonCancelTask);
         imageButtonCalendar = findViewById(R.id.imageButtonCalendar);
 
         // Initially, disable the button
         buttonCreateTask.setEnabled(false);
 
-        // Retrieve the user ID from the intent
-
-        Intent intent = getIntent();
-        if (intent.hasExtra("user_id")) {
-            userId = intent.getIntExtra("user_id", -1); // -1 is the default value if the key is not found
-        } else {
-            Toast.makeText(v.getContext(), "User ID not provided", Toast.LENGTH_SHORT).show();
-        }
-
-
         // Add a TextWatcher to the input field
-        inputTaskName.addTextChangedListener(new TextWatcher() {
+        taskDescription.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed for this example
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -59,6 +50,7 @@ public class TaskCreator extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                // Not needed for this example
             }
         });
 

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">HeroHabit</string>
+    <string name="login">Log In</string>
+    <string name="signin">Sign In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
     <string name="title_activity_task_creator">TaskCreator</string>
     <string name="cancel_task_button">Cancel Task</string>
     <string name="create_task_button">Create Task</string>
