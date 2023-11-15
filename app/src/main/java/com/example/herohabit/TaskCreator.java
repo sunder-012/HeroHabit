@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.UUID;
+
 public class TaskCreator extends AppCompatActivity {
     private TextInputEditText inputTaskName;
     private Button buttonCreateTask;
@@ -34,14 +36,14 @@ public class TaskCreator extends AppCompatActivity {
         buttonCreateTask.setEnabled(false);
 
         // Retrieve the user ID from the intent
-        /*
+
         Intent intent = getIntent();
         if (intent.hasExtra("user_id")) {
             userId = intent.getIntExtra("user_id", -1); // -1 is the default value if the key is not found
         } else {
             Toast.makeText(v.getContext(), "User ID not provided", Toast.LENGTH_SHORT).show();
         }
-         */
+
 
         // Add a TextWatcher to the input field
         inputTaskName.addTextChangedListener(new TextWatcher() {
@@ -86,9 +88,12 @@ public class TaskCreator extends AppCompatActivity {
             public void onClick(View v) {
                 // Get the task name
                 taskName = inputTaskName.getText().toString();
+                /*
+                // Create a Unique Identifier for Mission
+                String missionID = UUID.randomUUID().toString();
+                 */
                 // Create the insert String
-                String insertQuery = "";
-                //String insertQuery = "INSERT INTO " + MISSION + " (" + userId+ ", " + taskname + ") VALUES ('" + username + "', '" + password + "', " + experience + ");";;
+                String insertQuery = "INSERT INTO " + TASKS + " (" + user_id + ", " + title + ") VALUES ('" + userId + "', " + taskName + ");";
                 // Execute the query
                 db.execSQL(insertQuery);
             }
